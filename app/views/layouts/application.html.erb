@@ -12,18 +12,32 @@
   <body>
     <header>
       <p>Bookers</p>
-      <p><i class="fas fa-home"></i>Home</p>
 
       <% if user_signed_in? %>
+        <li>
+          <%= link_to books_path, method: :get do %>
+            <i class="fas fa-home"></i>Home
+          <% end %>
+        </li>
+        <p>
+          <i class="fas fa-users"></i>Users
+        </p>
+        <p>
+          <i class="fas fa-book-open"></i>Books
+        </p>
         <li>
           <%= link_to  destroy_user_session_path, method: :delete do %>
             <i class="fas fa-sign-out-alt"></i>logout
           <% end %>
         </li>
       <% else %>
+        <p>
+          <i class="fas fa-home"></i>Home
+        </p>
+
         <li>
           <%= link_to about_path, method: :get do %>
-            <i class="fas fa-link"></i>about
+            <i class="fas fa-link"></i>About
           <% end %>
         </li>
         <li>
@@ -37,6 +51,7 @@
           <% end %>
         </li>
       <% end %>
+
     </header>
 
     <%= yield %>
