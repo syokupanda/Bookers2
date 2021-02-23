@@ -1,12 +1,42 @@
-<div>
-  <h1>Book detail</h1>
-  <p><%= @book.title %></p>
-  <p><%= @book.body %></p>
+<%= flash[:new] %>
+<%= flash[:bookupdate] %>
 
-  <% if @book.user == current_user %>
-    <%= link_to "Edit", edit_book_path(@book), method: :get %>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+
+      <%= render 'books/book', book: @book, user: @user %>
+
+    </div>
+
+
+  <div class="col-md-8 offset-md-1">
+  <h1>Book detail</h1>
+    <table class="table table-hover table-inverse">
+      <tr>
+        <td>
+          <%= link_to user_path(@books.user) do %>
+            <%= attachment_image_tag @books.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg" %>
+          <% end %>
+          <br>
+          <%= link_to user_path(@books.user) do %>
+            <%= @user.name %>
+          <% end %>
+        </td>
+        <td><%= @books.title %></td>
+        <td><%= @books.body %></td>
+        <td>
+  <% if @books.user == current_user %>
+    <%= link_to "Edit", edit_book_path(@books), method: :get %>
   <% end %>
-  <% if @book.user == current_user %>
-    <%= link_to "Destroy", book_path(@book), method: :delete %>
+        </td>
+        <td>
+  <% if @books.user == current_user %>
+    <%= link_to "Destroy", book_path(@books), method: :delete %>
   <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  </div>
 </div>
